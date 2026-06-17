@@ -3,10 +3,17 @@ import { useCarbonCalculator } from "../context/AppContext";
 import { UNIT_TYPES } from "../utils/constants";
 import { Trash2, ShieldCheck, Sun, Moon, Info, Settings as SettingsIcon } from "lucide-react";
 import useTheme from "../hooks/useTheme";
+import useSimulatedLoading from "../hooks/useSimulatedLoading";
+import { SettingsSkeleton } from "../components/SkeletonLoader";
 
 export default function Settings() {
   const { unitPreference, setUnitPreference, resetAllData } = useCarbonCalculator();
   const { theme, toggleTheme } = useTheme();
+  const isLoading = useSimulatedLoading(500);
+
+  if (isLoading) {
+    return <SettingsSkeleton />;
+  }
 
   const handleReset = () => {
     const confirm = window.confirm(
@@ -35,7 +42,7 @@ export default function Settings() {
       {/* Grid Settings Cards */}
       <div className="space-y-6">
         {/* Unit Preference & Theme card */}
-        <div className="bg-white dark:bg-gray-900 border border-gray-150 dark:border-gray-800 rounded-3xl p-6 shadow-sm space-y-6">
+        <div className="neo-card-dark space-y-6">
           <h3 className="text-base font-bold text-gray-900 dark:text-gray-100">
             System Preferences
           </h3>
@@ -50,23 +57,23 @@ export default function Settings() {
                 Converts carbon weights and travel distances between Metric (tonnes, km) and Imperial (lbs, miles).
               </p>
               
-              <div className="flex bg-gray-105 dark:bg-gray-800/60 p-1 rounded-2xl w-fit border border-gray-100 dark:border-gray-800/40">
+              <div className="flex glass-panel p-1 rounded-2xl w-fit">
                 <button
                   onClick={() => setUnitPreference(UNIT_TYPES.METRIC)}
-                  className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${
+                  className={`px-4 py-2 rounded-xl text-xs font-bold transition-all duration-200 cursor-pointer ${
                     unitPreference === UNIT_TYPES.METRIC
-                      ? "bg-white dark:bg-gray-900 text-gray-950 dark:text-white shadow-sm"
-                      : "text-gray-500 hover:text-gray-700 dark:hover:text-gray-300"
+                      ? "soft-pressed border border-emerald-500/35 text-emerald-600 dark:text-emerald-400 font-extrabold bg-emerald-500/5"
+                      : "soft-raised text-gray-500 hover:text-gray-700 dark:text-gray-450 dark:hover:text-gray-200 bg-white dark:bg-gray-900"
                   }`}
                 >
                   Metric (kg/km)
                 </button>
                 <button
                   onClick={() => setUnitPreference(UNIT_TYPES.IMPERIAL)}
-                  className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${
+                  className={`px-4 py-2 rounded-xl text-xs font-bold transition-all duration-200 cursor-pointer ${
                     unitPreference === UNIT_TYPES.IMPERIAL
-                      ? "bg-white dark:bg-gray-900 text-gray-950 dark:text-white shadow-sm"
-                      : "text-gray-500 hover:text-gray-700 dark:hover:text-gray-300"
+                      ? "soft-pressed border border-emerald-500/35 text-emerald-600 dark:text-emerald-400 font-extrabold bg-emerald-500/5"
+                      : "soft-raised text-gray-500 hover:text-gray-700 dark:text-gray-450 dark:hover:text-gray-200 bg-white dark:bg-gray-900"
                   }`}
                 >
                   Imperial (lbs/mi)
@@ -85,7 +92,7 @@ export default function Settings() {
               
               <button
                 onClick={toggleTheme}
-                className="px-4 py-2 rounded-2xl bg-gray-100 dark:bg-gray-800 hover:bg-gray-250 dark:hover:bg-gray-750 text-gray-800 dark:text-gray-250 text-xs font-bold flex items-center gap-2 transition-all border border-gray-200 dark:border-gray-750"
+                className="px-4 py-2 rounded-2xl bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 text-xs font-bold flex items-center gap-2 border-2 border-gray-950 dark:border-gray-800 shadow-[3px_3px_0px_0px_rgba(9,9,11,1)] dark:shadow-[3px_3px_0px_0px_rgba(255,255,255,1)] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all cursor-pointer"
               >
                 {theme === "dark" ? (
                   <>
@@ -102,19 +109,19 @@ export default function Settings() {
         </div>
 
         {/* Local Storage Reset Option */}
-        <div className="bg-white dark:bg-gray-900 border border-gray-150 dark:border-gray-800 rounded-3xl p-6 shadow-sm space-y-4">
+        <div className="bg-white dark:bg-gray-900 border-2 border-gray-950 dark:border-gray-850 rounded-3xl p-6 shadow-[4px_4px_0px_0px_#ef4444] hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[6px_6px_0px_0px_#ef4444] transition-all duration-200 space-y-4">
           <div>
-            <h3 className="text-base font-bold text-gray-900 dark:text-gray-100 text-rose-500">
+            <h3 className="text-base font-bold text-rose-500">
               Danger Zone
             </h3>
-            <p className="text-[11px] text-gray-400 dark:text-gray-500 leading-normal mt-1 font-medium">
+            <p className="text-[11px] text-gray-455 dark:text-gray-500 leading-normal mt-1 font-semibold">
               Erase all calculations history, earned levels, XP milestones, and daily checkins stored on this browser.
             </p>
           </div>
 
           <button
             onClick={handleReset}
-            className="px-5 py-2.5 rounded-2xl bg-rose-500 hover:bg-rose-600 text-white font-bold text-xs shadow-md shadow-rose-500/10 hover:shadow-rose-500/20 transition-all flex items-center gap-1.5 focus:outline-none"
+            className="px-5 py-2.5 rounded-2xl bg-rose-500 hover:bg-rose-600 text-white font-black text-xs transition-all flex items-center gap-1.5 border-2 border-gray-950 dark:border-gray-850 shadow-[3px_3px_0px_0px_rgba(9,9,11,1)] dark:shadow-[3px_3px_0px_0px_rgba(255,255,255,1)] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none cursor-pointer"
           >
             <Trash2 className="h-4.5 w-4.5" /> Wipe All Browser Data
           </button>

@@ -35,15 +35,15 @@ export default function Navbar() {
     }`;
 
   return (
-    <nav className="sticky top-0 z-40 bg-white/85 dark:bg-gray-950/85 backdrop-blur-md border-b border-gray-100 dark:border-gray-900 transition-colors">
+    <nav className="sticky top-0 z-40 glass-nav transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2 group">
-            <div className="p-1.5 bg-emerald-500 text-white rounded-lg group-hover:rotate-12 transition-transform duration-300 shadow-lg shadow-emerald-500/20">
+            <div className="p-1.5 bg-emerald-500 text-white rounded-lg group-hover:rotate-12 transition-transform duration-300 shadow-md shadow-emerald-500/20 border border-emerald-600">
               <Sprout className="h-5 w-5" />
             </div>
-            <span className="text-xl font-bold bg-gradient-to-r from-emerald-600 to-teal-500 dark:from-emerald-400 dark:to-teal-300 bg-clip-text text-transparent tracking-tight">
+            <span className="text-xl font-black bg-gradient-to-r from-emerald-600 to-teal-500 dark:from-emerald-400 dark:to-teal-300 bg-clip-text text-transparent tracking-tight">
               EcoXP AI
             </span>
           </Link>
@@ -60,8 +60,8 @@ export default function Navbar() {
           {/* Right Controls */}
           <div className="hidden md:flex items-center gap-4">
             {/* XP Badge */}
-            <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-600 dark:text-amber-400 font-semibold text-xs shadow-inner">
-              <Trophy className="h-3.5 w-3.5 animate-bounce" />
+            <div className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-amber-400 text-gray-950 font-extrabold text-xs border-2 border-gray-950 dark:border-gray-800 shadow-[2.5px_2.5px_0px_0px_rgba(9,9,11,1)]">
+              <Trophy className="h-3.5 w-3.5 fill-current animate-bounce" />
               <span>{userXP} XP</span>
             </div>
             <ThemeToggle />
@@ -69,8 +69,8 @@ export default function Navbar() {
 
           {/* Mobile menu button */}
           <div className="flex items-center md:hidden gap-3">
-            <div className="flex items-center gap-1 px-2.5 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-600 dark:text-amber-400 font-semibold text-xs">
-              <Trophy className="h-3 w-3" />
+            <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-amber-400 text-gray-950 font-extrabold text-xs border border-gray-950 dark:border-gray-800 shadow-[1.5px_1.5px_0px_0px_rgba(9,9,11,1)]">
+              <Trophy className="h-3 w-3 fill-current" />
               <span>{userXP} XP</span>
             </div>
             <ThemeToggle />

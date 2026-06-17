@@ -67,7 +67,7 @@ export default function ResultChart({ categories }) {
   };
 
   return (
-    <div className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800/80 p-6 rounded-3xl shadow-sm space-y-6">
+    <div className="neo-card-dark space-y-6">
       {/* Chart Selector Header */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>

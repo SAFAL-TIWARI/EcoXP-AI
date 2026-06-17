@@ -6,9 +6,13 @@ import EmptyState from "../components/EmptyState";
 import InsightCards from "../components/InsightCards";
 import { getAIResponse } from "../services/aiAssistant";
 import { formatCarbon } from "../utils/formatters";
+import useSimulatedLoading from "../hooks/useSimulatedLoading";
+import { InsightsSkeleton, ChatTypingSkeleton } from "../components/SkeletonLoader";
 
 export default function Insights() {
   const { latestCalculation, unitPreference } = useCarbonCalculator();
+  const isLoading = useSimulatedLoading(650);
+  const [isTyping, setIsTyping] = useState(false);
   
   // Chat States
   const [messages, setMessages] = useState([
@@ -41,6 +45,10 @@ export default function Insights() {
     );
   }
 
+  if (isLoading) {
+    return <InsightsSkeleton />;
+  }
+
   const { result, insights } = latestCalculation;
 
   // Handle AI Chat submissions
@@ -51,6 +59,7 @@ export default function Insights() {
     const userMsg = chatInput.trim();
     setMessages(prev => [...prev, { id: Date.now() + "_user", sender: "user", text: userMsg }]);
     setChatInput("");
+    setIsTyping(true);
 
     // Simulate thinking state
     setTimeout(() => {
@@ -64,7 +73,8 @@ export default function Insights() {
           tips: response.suggestedTips
         }
       ]);
-    }, 450);
+      setIsTyping(false);
+    }, 750);
   };
 
   const handleSuggestionClick = (query) => {
@@ -109,7 +119,7 @@ export default function Insights() {
       {/* 2. Interactive AI Assistant chat section */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Helper info / Pre-fill queries */}
-        <div className="bg-white dark:bg-gray-900 border border-gray-150 dark:border-gray-800 rounded-3xl p-6 shadow-sm flex flex-col justify-between h-fit lg:h-96">
+        <div className="neo-card-dark flex flex-col justify-between h-fit lg:h-96 p-6">
           <div className="space-y-3">
             <h4 className="text-sm font-bold text-gray-900 dark:text-gray-150 flex items-center gap-1.5">
               <Bot className="h-4.5 w-4.5 text-emerald-500" /> EcoXp AI Helper
@@ -124,7 +134,7 @@ export default function Insights() {
               <button
                 key={idx}
                 onClick={() => handleSuggestionClick(q)}
-                className="w-full text-left p-3 rounded-2xl bg-gray-50 dark:bg-gray-850 hover:bg-emerald-500/10 dark:hover:bg-emerald-500/5 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors text-xs font-semibold text-gray-700 dark:text-gray-300 border border-gray-100 dark:border-gray-800/80"
+                className="w-full text-left p-3 rounded-2xl bg-white dark:bg-gray-900 text-xs font-bold text-gray-700 dark:text-gray-350 hover:text-emerald-600 dark:hover:text-emerald-400 border border-transparent soft-raised cursor-pointer hover:border-emerald-500/30"
               >
                 {q}
               </button>
@@ -133,7 +143,7 @@ export default function Insights() {
         </div>
 
         {/* Chat Widget Panel */}
-        <div className="lg:col-span-2 bg-white dark:bg-gray-900 border border-gray-150 dark:border-gray-800 rounded-3xl p-6 shadow-sm flex flex-col justify-between h-96">
+        <div className="lg:col-span-2 neo-card-dark flex flex-col justify-between h-96 p-6">
           {/* Messages Feed */}
           <div className="flex-grow overflow-y-auto space-y-4 pr-1 mb-4 scrollbar-thin">
             {messages.map(msg => (
@@ -181,6 +191,7 @@ export default function Insights() {
                 </div>
               </div>
             ))}
+            {isTyping && <ChatTypingSkeleton />}
           </div>
 
           {/* Form Input */}
@@ -195,7 +206,7 @@ export default function Insights() {
             <button
               id="submit-chat-btn"
               type="submit"
-              className="p-2.5 rounded-2xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold transition-all shadow-md shadow-emerald-500/10 hover:shadow-emerald-500/20"
+              className="p-2.5 rounded-2xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold transition-all border-2 border-gray-950 dark:border-gray-800 shadow-[2px_2px_0px_0px_rgba(9,9,11,1)] dark:shadow-[2px_2px_0px_0px_rgba(255,255,255,1)] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none cursor-pointer"
             >
               <Send className="h-4 w-4" />
             </button>

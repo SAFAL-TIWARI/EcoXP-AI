@@ -1,8 +1,15 @@
 import React from "react";
 import { BookOpen, HelpCircle, Activity, Globe, Leaf, HelpCircle as QuestionIcon, ShieldAlert } from "lucide-react";
 import { motion } from "framer-motion";
+import useSimulatedLoading from "../hooks/useSimulatedLoading";
+import { LearnSkeleton } from "../components/SkeletonLoader";
 
 export default function Learn() {
+  const isLoading = useSimulatedLoading(500);
+
+  if (isLoading) {
+    return <LearnSkeleton />;
+  }
   const modules = [
     {
       icon: Globe,
@@ -70,7 +77,7 @@ export default function Learn() {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: idx * 0.08 }}
-              className={`p-6 rounded-3xl border bg-gradient-to-br bg-white dark:bg-gray-900 shadow-sm flex flex-col space-y-4 hover:shadow-md transition-all ${m.color}`}
+              className="neo-card-dark flex flex-col space-y-4"
             >
               <div className="p-3 bg-white dark:bg-gray-800 rounded-2xl w-fit shadow-sm border border-gray-100 dark:border-gray-800">
                 <Icon className="h-6 w-6" />
@@ -87,7 +94,7 @@ export default function Learn() {
       </div>
 
       {/* Myths & Facts Section */}
-      <div className="bg-white dark:bg-gray-900 border border-gray-150 dark:border-gray-800 p-6 rounded-3xl shadow-sm space-y-6">
+      <div className="neo-card-dark space-y-6">
         <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100 flex items-center gap-2">
           <HelpCircle className="h-5 w-5 text-amber-500" /> Climate Myths vs. Facts
         </h3>

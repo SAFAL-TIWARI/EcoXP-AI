@@ -90,7 +90,7 @@ export default function StepForm() {
   return (
     <div className="max-w-3xl mx-auto space-y-6">
       {/* Demo Preset Panel */}
-      <div className="bg-gradient-to-r from-emerald-500/10 to-teal-500/15 border border-emerald-500/15 rounded-3xl p-5 flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="glass-panel border border-emerald-500/20 dark:border-teal-500/20 rounded-3xl p-5 flex flex-col md:flex-row md:items-center justify-between gap-4 shadow-sm">
         <div>
           <h4 className="text-sm font-extrabold text-emerald-800 dark:text-emerald-300">
             Hackathon Demo Presets
@@ -103,21 +103,21 @@ export default function StepForm() {
           <button
             type="button"
             onClick={() => handleLoadPreset("ecoChampion")}
-            className="px-3.5 py-1.5 rounded-xl bg-emerald-500 text-white font-semibold text-xs hover:bg-emerald-600 shadow-sm transition-all"
+            className="px-3.5 py-1.5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs border border-gray-950 dark:border-gray-800 shadow-[2px_2px_0px_0px_rgba(9,9,11,1)] dark:shadow-[2px_2px_0px_0px_rgba(255,255,255,1)] transition-all cursor-pointer active:translate-x-0.5 active:translate-y-0.5 active:shadow-none"
           >
             Sustainable Champion
           </button>
           <button
             type="button"
             onClick={() => handleLoadPreset("average")}
-            className="px-3.5 py-1.5 rounded-xl bg-gray-150 dark:bg-gray-800 text-gray-800 dark:text-gray-250 font-semibold text-xs hover:bg-gray-200 dark:hover:bg-gray-700 transition-all border border-gray-200 dark:border-gray-700"
+            className="px-3.5 py-1.5 rounded-xl bg-gray-150 dark:bg-gray-800 text-gray-850 dark:text-gray-250 font-bold text-xs border border-gray-950 dark:border-gray-800 shadow-[2px_2px_0px_0px_rgba(9,9,11,1)] dark:shadow-[2px_2px_0px_0px_rgba(255,255,255,1)] transition-all cursor-pointer active:translate-x-0.5 active:translate-y-0.5 active:shadow-none"
           >
             Average Citizen
           </button>
           <button
             type="button"
             onClick={() => handleLoadPreset("highImpact")}
-            className="px-3.5 py-1.5 rounded-xl bg-rose-500 text-white font-semibold text-xs hover:bg-rose-600 shadow-sm transition-all"
+            className="px-3.5 py-1.5 rounded-xl bg-rose-500 hover:bg-rose-600 text-white font-bold text-xs border border-gray-950 dark:border-gray-800 shadow-[2px_2px_0px_0px_rgba(9,9,11,1)] dark:shadow-[2px_2px_0px_0px_rgba(255,255,255,1)] transition-all cursor-pointer active:translate-x-0.5 active:translate-y-0.5 active:shadow-none"
           >
             High Carbon Footprint
           </button>
@@ -125,7 +125,7 @@ export default function StepForm() {
       </div>
 
       {/* Calculator Form */}
-      <form onSubmit={handleSubmit(onSubmit)} className="bg-white dark:bg-gray-900 border border-gray-150 dark:border-gray-800 rounded-3xl shadow-sm p-6 sm:p-8 space-y-6">
+      <form onSubmit={handleSubmit(onSubmit)} className="neo-card p-6 sm:p-8 space-y-6">
         {/* Header Progress indicator */}
         <div className="space-y-3">
           <div className="flex items-center justify-between">
@@ -293,21 +293,24 @@ export default function StepForm() {
                       <label className="block text-sm font-bold text-gray-800 dark:text-gray-250">
                         Vehicle / Fuel Type
                       </label>
-                      <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
-                        {["petrol", "diesel", "hybrid", "electric", "motorcycle"].map(v => (
-                          <button
-                            key={v}
-                            type="button"
-                            onClick={() => setValue("vehicleType", v)}
-                            className={`p-3.5 rounded-2xl border text-center font-bold text-xs uppercase transition-all ${
-                              formValues.vehicleType === v
-                                ? "border-emerald-500 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400"
-                                : "border-gray-100 dark:border-gray-800/80 hover:border-gray-200 dark:hover:border-gray-750 text-gray-600 dark:text-gray-300"
-                            }`}
-                          >
-                            {v}
-                          </button>
-                        ))}
+                      <div className="grid grid-cols-2 sm:grid-cols-5 gap-3 pt-1">
+                        {["petrol", "diesel", "hybrid", "electric", "motorcycle"].map(v => {
+                          const isSel = formValues.vehicleType === v;
+                          return (
+                            <button
+                              key={v}
+                              type="button"
+                              onClick={() => setValue("vehicleType", v)}
+                              className={`p-3.5 rounded-2xl text-center font-extrabold text-xs uppercase transition-all duration-200 border cursor-pointer ${
+                                isSel
+                                  ? "soft-pressed border-emerald-500/40 text-emerald-600 dark:text-emerald-400 bg-emerald-500/5 dark:bg-emerald-500/5"
+                                  : "soft-raised border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 bg-gray-50 dark:bg-gray-850/60"
+                              }`}
+                            >
+                              {v}
+                            </button>
+                          );
+                        })}
                       </div>
                     </div>
                   )}
@@ -496,7 +499,7 @@ export default function StepForm() {
             type="button"
             onClick={prevStep}
             disabled={step === 1}
-            className="px-5 py-2.5 rounded-2xl text-sm font-bold text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors disabled:opacity-30 disabled:pointer-events-none flex items-center gap-1.5 focus:outline-none"
+            className="px-5 py-2.5 rounded-2xl text-sm font-bold text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors disabled:opacity-30 disabled:pointer-events-none flex items-center gap-1.5 focus:outline-none cursor-pointer"
           >
             <ArrowLeft className="h-4.5 w-4.5" /> Back
           </button>
@@ -505,14 +508,14 @@ export default function StepForm() {
             <button
               type="button"
               onClick={nextStep}
-              className="px-6 py-2.5 rounded-2xl text-sm font-bold bg-emerald-500 hover:bg-emerald-600 text-white flex items-center gap-1.5 shadow-md shadow-emerald-500/10 transition-all focus:outline-none"
+              className="px-6 py-2.5 rounded-2xl text-sm font-bold bg-emerald-500 hover:bg-emerald-600 text-white flex items-center gap-1.5 transition-all focus:outline-none border-2 border-gray-950 dark:border-gray-800 shadow-[3px_3px_0px_0px_rgba(9,9,11,1)] dark:shadow-[3px_3px_0px_0px_rgba(255,255,255,1)] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none cursor-pointer"
             >
               Continue <ArrowRight className="h-4.5 w-4.5" />
             </button>
           ) : (
             <button
               type="submit"
-              className="px-6 py-2.5 rounded-2xl text-sm font-bold bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white flex items-center gap-1.5 shadow-lg shadow-emerald-500/15 transition-all focus:outline-none animate-pulse"
+              className="px-6 py-2.5 rounded-2xl text-sm font-bold bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white flex items-center gap-1.5 transition-all focus:outline-none border-2 border-gray-950 dark:border-gray-800 shadow-[3px_3px_0px_0px_rgba(9,9,11,1)] dark:shadow-[3px_3px_0px_0px_rgba(255,255,255,1)] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none cursor-pointer animate-pulse"
             >
               Calculate footprint <Globe className="h-4.5 w-4.5" />
             </button>

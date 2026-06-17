@@ -15,7 +15,7 @@ export default function MetricCard({
       initial={{ opacity: 0, y: 15 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3 }}
-      className={`p-6 bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800/80 rounded-2xl shadow-sm hover:shadow-md transition-all ${className}`}
+      className={`neo-card-dark ${className}`}
     >
       <div className="flex items-center justify-between mb-4">
         <span className="text-sm font-medium text-gray-500 dark:text-gray-400">

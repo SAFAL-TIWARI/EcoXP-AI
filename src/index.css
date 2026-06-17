@@ -84,3 +84,152 @@
     padding-bottom: 0 !important;
   }
 }
+
+/* ==========================================
+   Hybrid Design Utilities (EcoXp Overhaul)
+   ========================================== */
+
+/* Neo-brutalist custom utilities */
+.neo-card {
+  background-color: #ffffff;
+  border: 2px solid #09090b;
+  border-radius: 1.5rem; /* 24px */
+  padding: 1.5rem;
+  box-shadow: 4px 4px 0px 0px #10b981;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.dark .neo-card {
+  background-color: #111827; /* gray-900 */
+  border: 2px solid #374151; /* gray-700 */
+  box-shadow: 4px 4px 0px 0px #14b8a6;
+}
+.neo-card:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0px 0px #10b981;
+}
+.dark .neo-card:hover {
+  box-shadow: 6px 6px 0px 0px #14b8a6;
+}
+
+.neo-card-dark {
+  background-color: #ffffff;
+  border: 2px solid #09090b;
+  border-radius: 1.5rem;
+  padding: 1.5rem;
+  box-shadow: 4px 4px 0px 0px #09090b;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.dark .neo-card-dark {
+  background-color: #111827;
+  border: 2px solid #374151;
+  box-shadow: 4px 4px 0px 0px #f3f4f6;
+}
+.neo-card-dark:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0px 0px #09090b;
+}
+.dark .neo-card-dark:hover {
+  box-shadow: 6px 6px 0px 0px #f3f4f6;
+}
+
+.neo-btn {
+  border: 2px solid #09090b;
+  font-weight: 700;
+  border-radius: 1rem; /* 16px */
+  transition: all 0.15s ease-in-out;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.dark .neo-btn {
+  border: 2px solid #374151;
+}
+.neo-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: none !important;
+}
+
+.neo-btn-primary {
+  background-color: #10b981; /* emerald-500 */
+  color: #ffffff;
+  box-shadow: 3px 3px 0px 0px #09090b;
+}
+.dark .neo-btn-primary {
+  box-shadow: 3px 3px 0px 0px #ffffff;
+}
+.neo-btn-primary:hover {
+  background-color: #059669; /* emerald-600 */
+}
+
+.neo-btn-secondary {
+  background-color: #f3f4f6; /* gray-100 */
+  color: #1f2937; /* gray-800 */
+  box-shadow: 3px 3px 0px 0px #09090b;
+}
+.dark .neo-btn-secondary {
+  background-color: #1f2937; /* gray-800 */
+  color: #eceef2;
+  box-shadow: 3px 3px 0px 0px #ffffff;
+}
+.neo-btn-secondary:hover {
+  background-color: #e5e7eb;
+}
+.dark .neo-btn-secondary:hover {
+  background-color: #374151;
+}
+
+.neo-btn-danger {
+  background-color: #ef4444; /* rose-500 */
+  color: #ffffff;
+  box-shadow: 3px 3px 0px 0px #09090b;
+}
+.dark .neo-btn-danger {
+  box-shadow: 3px 3px 0px 0px #ffffff;
+}
+.neo-btn-danger:hover {
+  background-color: #dc2626;
+}
+
+/* Neumorphism soft utilities */
+.soft-raised {
+  box-shadow: 5px 5px 10px #d1d5db, -5px -5px 10px #ffffff;
+  border-radius: 1.25rem;
+  transition: all 0.2s ease;
+}
+.dark .soft-raised {
+  box-shadow: 5px 5px 10px #0a0f1d, -5px -5px 10px #1e293b;
+}
+
+.soft-pressed {
+  box-shadow: inset 4px 4px 8px #d1d5db, inset -4px -4px 8px #ffffff;
+  border-radius: 1.25rem;
+  transition: all 0.2s ease;
+}
+.dark .soft-pressed {
+  box-shadow: inset 4px 4px 8px #0a0f1d, inset -4px -4px 8px #1e293b;
+}
+
+/* Glassmorphism utilities */
+.glass-nav {
+  background-color: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+}
+.dark .glass-nav {
+  background-color: rgba(9, 11, 20, 0.85);
+  border-bottom: 1px solid rgba(31, 41, 55, 0.7);
+}
+
+.glass-panel {
+  background-color: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+.dark .glass-panel {
+  background-color: rgba(17, 24, 39, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+

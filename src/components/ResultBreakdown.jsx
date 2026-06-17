@@ -8,7 +8,7 @@ export default function ResultBreakdown({ categories, total }) {
   const { unitPreference } = useCarbonCalculator();
 
   return (
-    <div className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800/80 p-6 rounded-3xl shadow-sm space-y-6">
+    <div className="neo-card-dark space-y-6">
       <div>
         <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100">
           Emission Breakdown

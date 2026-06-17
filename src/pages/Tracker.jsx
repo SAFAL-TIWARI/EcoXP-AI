@@ -4,9 +4,12 @@ import { useCarbonCalculator } from "../context/AppContext";
 import HabitTracker from "../components/HabitTracker";
 import BadgeGrid from "../components/BadgeGrid";
 import { challenges as challengesConfig } from "../data/challenges";
+import useSimulatedLoading from "../hooks/useSimulatedLoading";
+import { TrackerSkeleton } from "../components/SkeletonLoader";
 
 export default function Tracker() {
   const { completedChallenges, completeChallenge } = useCarbonCalculator();
+  const isLoading = useSimulatedLoading(550);
 
   const handleCompleteChallenge = (id, xp) => {
     completeChallenge(id, xp);
@@ -17,6 +20,10 @@ export default function Tracker() {
     medium: "bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/10",
     hard: "bg-rose-500/10 text-rose-600 dark:text-rose-400 border-rose-500/10"
   };
+
+  if (isLoading) {
+    return <TrackerSkeleton />;
+  }
 
   return (
     <div className="py-8 space-y-10">
@@ -59,11 +66,11 @@ export default function Tracker() {
             return (
               <div
                 key={challenge.id}
-                className={`p-5 rounded-3xl border transition-all flex items-start gap-4 justify-between ${
+                className={
                   isCompleted
-                    ? "border-emerald-500/20 bg-emerald-500/5 dark:bg-emerald-950/5 shadow-inner"
-                    : "bg-white dark:bg-gray-900 border-gray-100 dark:border-gray-800/80 hover:shadow-md"
-                }`}
+                    ? "p-5 rounded-3xl border border-emerald-500/20 bg-emerald-500/5 dark:bg-emerald-950/5 soft-pressed flex items-start gap-4 justify-between"
+                    : "neo-card-dark p-5 flex items-start gap-4 justify-between transition-all duration-200"
+                }
               >
                 <div className="space-y-2 flex-grow">
                   <div className="flex items-center gap-2 flex-wrap">
@@ -95,7 +102,7 @@ export default function Tracker() {
                   ) : (
                     <button
                       onClick={() => handleCompleteChallenge(challenge.id, challenge.xp)}
-                      className="px-3 py-1.5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-bold shadow-md shadow-emerald-500/15 transition-all flex items-center gap-1 focus:outline-none"
+                      className="px-3 py-1.5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-bold flex items-center gap-1 border border-gray-950 dark:border-gray-800 shadow-[2px_2px_0px_0px_rgba(9,9,11,1)] dark:shadow-[2px_2px_0px_0px_rgba(255,255,255,1)] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none cursor-pointer"
                     >
                       <Zap className="h-3.5 w-3.5" /> Claim +{challenge.xp} XP
                     </button>

@@ -35,8 +35,8 @@ export default function HistoryList() {
   }
 
   return (
-    <div className="bg-white dark:bg-gray-900 border border-gray-150 dark:border-gray-800 rounded-3xl overflow-hidden shadow-sm">
-      <div className="p-6 border-b border-gray-100 dark:border-gray-800">
+    <div className="neo-card-dark overflow-hidden p-0">
+      <div className="p-6 border-b border-gray-150 dark:border-gray-800">
         <h3 className="text-lg font-bold text-gray-900 dark:text-gray-150">
           Saved Reports
         </h3>

@@ -1,7 +1,15 @@
 import React from "react";
 import StepForm from "../components/StepForm";
+import useSimulatedLoading from "../hooks/useSimulatedLoading";
+import { CalculatorSkeleton } from "../components/SkeletonLoader";
 
 export default function Calculator() {
+  const isLoading = useSimulatedLoading(500);
+
+  if (isLoading) {
+    return <CalculatorSkeleton />;
+  }
+
   return (
     <div className="py-8 space-y-6">
       <div className="text-center max-w-xl mx-auto space-y-2">

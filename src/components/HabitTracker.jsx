@@ -58,23 +58,23 @@ export default function HabitTracker() {
       {/* Left Column: Streak and XP summary */}
       <div className="space-y-6">
         {/* Streak card */}
-        <div className="p-6 bg-gradient-to-br from-orange-400 to-amber-500 rounded-3xl text-white shadow-lg shadow-orange-500/15 relative overflow-hidden flex flex-col justify-between h-48">
+        <div className="p-6 bg-gradient-to-br from-orange-400 to-amber-500 rounded-3xl text-white border-2 border-gray-950 dark:border-gray-850 shadow-[4px_4px_0px_0px_#09090b] dark:shadow-[4px_4px_0px_0px_#ffffff] relative overflow-hidden flex flex-col justify-between h-48">
           <div className="absolute right-[-10px] bottom-[-20px] opacity-15">
             <Flame className="h-40 w-40" />
           </div>
           
           <div className="flex items-center justify-between z-10">
-            <span className="text-xs font-semibold uppercase tracking-wider opacity-85">
+            <span className="text-xs font-bold uppercase tracking-wider opacity-85">
               Daily Streak
             </span>
             <Flame className="h-6 w-6 animate-pulse" />
           </div>
           
           <div className="z-10">
-            <h3 className="text-5xl font-extrabold tracking-tight">
+            <h3 className="text-5xl font-black tracking-tight">
               {streak} {streak === 1 ? "Day" : "Days"}
             </h3>
-            <p className="text-xs opacity-80 mt-1.5 leading-relaxed font-medium">
+            <p className="text-xs opacity-85 mt-1.5 leading-relaxed font-semibold">
               {streak > 0
                 ? "Keep the fire burning! Log at least one green habit every day."
                 : "Start logging habits today to begin your streak!"}
@@ -83,7 +83,7 @@ export default function HabitTracker() {
         </div>
 
         {/* XP Progress Card */}
-        <div className="p-6 bg-white dark:bg-gray-900 border border-gray-150 dark:border-gray-800 rounded-3xl shadow-sm flex flex-col justify-between h-48">
+        <div className="neo-card-dark h-48 flex flex-col justify-between">
           <div className="flex items-center justify-between">
             <span className="text-sm font-bold text-gray-500 dark:text-gray-400">
               Your Level Progress
@@ -93,16 +93,16 @@ export default function HabitTracker() {
           
           <div>
             <div className="flex items-end justify-between mb-2">
-              <span className="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase">
+              <span className="text-xs font-black text-gray-400 dark:text-gray-500 uppercase">
                 LVL {Math.floor(userXP / 100) + 1}
               </span>
-              <span className="text-sm font-bold text-gray-850 dark:text-gray-150">
+              <span className="text-sm font-extrabold text-gray-850 dark:text-gray-150">
                 {userXP % 100} / 100 XP
               </span>
             </div>
             
             {/* Experience bar */}
-            <div className="h-2.5 w-full bg-gray-100 dark:bg-gray-850 rounded-full overflow-hidden">
+            <div className="h-2.5 w-full bg-gray-100 dark:bg-gray-850 rounded-full overflow-hidden border border-gray-200 dark:border-gray-800">
               <div
                 className="h-full bg-gradient-to-r from-emerald-500 to-teal-500 rounded-full transition-all duration-500"
                 style={{ width: `${userXP % 100}%` }}
@@ -117,7 +117,7 @@ export default function HabitTracker() {
       </div>
 
       {/* Right Column: Daily Checklist */}
-      <div className="lg:col-span-2 bg-white dark:bg-gray-900 border border-gray-150 dark:border-gray-800 rounded-3xl p-6 shadow-sm space-y-6">
+      <div className="lg:col-span-2 neo-card-dark space-y-6">
         <div>
           <h3 className="text-lg font-bold text-gray-900 dark:text-gray-150">
             Daily Green Actions
@@ -135,10 +135,10 @@ export default function HabitTracker() {
               <button
                 key={habit.id}
                 onClick={() => toggleHabit(habit.id)}
-                className={`p-4 rounded-2xl border text-left flex items-start gap-3 transition-all ${
+                className={`p-4 rounded-2xl border text-left flex items-start gap-3 transition-all duration-200 cursor-pointer ${
                   isChecked
-                    ? "border-emerald-500/20 bg-emerald-500/5 dark:bg-emerald-950/5 shadow-inner"
-                    : "border-gray-100 dark:border-gray-800/80 hover:shadow-md hover:border-gray-200 dark:hover:border-gray-700"
+                    ? "soft-pressed border-emerald-500/20 bg-emerald-500/5 dark:bg-emerald-950/5"
+                    : "soft-raised border-transparent bg-white dark:bg-gray-900/60 hover:bg-gray-50/50 dark:hover:bg-gray-850/5"
                 }`}
               >
                 <div className="mt-0.5 flex-shrink-0 text-gray-400 dark:text-gray-650 hover:text-emerald-500 transition-colors">
@@ -156,7 +156,7 @@ export default function HabitTracker() {
                     {habit.title}
                   </h4>
                   <p className={`text-xs ${
-                    isChecked ? "text-gray-400/80 dark:text-gray-650" : "text-gray-500 dark:text-gray-450"
+                    isChecked ? "text-gray-400/80 dark:text-gray-650" : "text-gray-500 dark:text-gray-400"
                   }`}>
                     {habit.description}
                   </p>

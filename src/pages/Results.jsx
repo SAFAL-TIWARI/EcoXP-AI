@@ -10,9 +10,12 @@ import ActionPlan from "../components/ActionPlan";
 import MetricCard from "../components/MetricCard";
 import { getImpactLevel, getComparisonPercentage, getReductionPotentialScore } from "../utils/scoringRules";
 import { formatCarbon } from "../utils/formatters";
+import useSimulatedLoading from "../hooks/useSimulatedLoading";
+import { ResultsSkeleton } from "../components/SkeletonLoader";
 
 export default function Results() {
   const { latestCalculation, unitPreference } = useCarbonCalculator();
+  const isLoading = useSimulatedLoading(600);
 
   if (!latestCalculation) {
     return (
@@ -32,6 +35,10 @@ export default function Results() {
         />
       </div>
     );
+  }
+
+  if (isLoading) {
+    return <ResultsSkeleton />;
   }
 
   const { result, recommendations, name, timestamp } = latestCalculation;
@@ -62,16 +69,16 @@ export default function Results() {
         </div>
         
         {/* Action Controls */}
-        <div className="flex gap-2 print:hidden">
+        <div className="flex gap-2.5 print:hidden">
           <button
             onClick={handlePrint}
-            className="p-2.5 rounded-xl bg-gray-100 dark:bg-gray-800 text-gray-650 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors flex items-center gap-1.5 text-xs font-bold"
+            className="p-2.5 rounded-xl bg-gray-100 dark:bg-gray-800 text-gray-650 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all flex items-center gap-1.5 text-xs font-bold border-2 border-gray-950 dark:border-gray-800 shadow-[2px_2px_0px_0px_rgba(9,9,11,1)] dark:shadow-[2px_2px_0px_0px_rgba(255,255,255,1)] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none cursor-pointer"
           >
             <Printer className="h-4 w-4" /> Print / Export PDF
           </button>
           <Link
             to="/calculator"
-            className="px-4 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs shadow-md shadow-emerald-500/10 hover:shadow-emerald-500/20 transition-all flex items-center gap-1.5"
+            className="px-4 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs transition-all flex items-center gap-1.5 border-2 border-gray-950 dark:border-gray-800 shadow-[2px_2px_0px_0px_rgba(9,9,11,1)] dark:shadow-[2px_2px_0px_0px_rgba(255,255,255,1)] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none cursor-pointer"
           >
             New Assessment
           </Link>
@@ -81,7 +88,7 @@ export default function Results() {
       {/* 2. Top Summary: Circular progress and KPI Metrics */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-center">
         {/* Circular Gauge */}
-        <div className="bg-white dark:bg-gray-900 border border-gray-150 dark:border-gray-800 rounded-3xl p-6 shadow-sm flex flex-col items-center justify-center text-center h-80 space-y-4">
+        <div className="neo-card-dark flex flex-col items-center justify-center text-center h-80 space-y-4">
           <ProgressRing value={total} color={impact.chartColor} />
           <div>
             <span className={`inline-block text-xs font-extrabold px-2.5 py-0.5 rounded-full border ${impact.colorClass}`}>

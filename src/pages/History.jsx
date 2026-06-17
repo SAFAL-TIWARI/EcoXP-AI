@@ -14,9 +14,12 @@ import {
   Tooltip
 } from "recharts";
 import { formatCarbonValueOnly } from "../utils/formatters";
+import useSimulatedLoading from "../hooks/useSimulatedLoading";
+import { HistorySkeleton } from "../components/SkeletonLoader";
 
 export default function History() {
   const { history, unitPreference } = useCarbonCalculator();
+  const isLoading = useSimulatedLoading(550);
 
   if (!history || history.length === 0) {
     return (
@@ -36,6 +39,10 @@ export default function History() {
         />
       </div>
     );
+  }
+
+  if (isLoading) {
+    return <HistorySkeleton />;
   }
 
   // Format trend data (oldest first for chronological line graph)
@@ -64,7 +71,7 @@ export default function History() {
 
       {/* Trend Line Chart */}
       {trendData.length > 1 && (
-        <div className="bg-white dark:bg-gray-900 border border-gray-150 dark:border-gray-800 p-6 rounded-3xl shadow-sm space-y-4">
+        <div className="neo-card-dark space-y-4">
           <div>
             <h3 className="text-base font-bold text-gray-900 dark:text-gray-100">
               Footprint Improvement Trend
